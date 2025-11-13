@@ -1,25 +1,32 @@
-#!/usr/bin/python
-
-# This is a simple echo bot using the decorator mechanism.
-# It echoes any incoming text messages.
 
 import telebot
-from telebot.types import Message
+
 from config import API_TOKEN
+from telebot.types import (KeyboardButton,
+                           ReplyKeyboardMarkup,
+                           ReplyKeyboardRemove,
+                           Message)
+
+
+keyboard = ReplyKeyboardMarkup(row_width=2, resize_keyboard=False)
+button = KeyboardButton(text = "Моя кнопка", request_location=True)
+button2 = KeyboardButton(text = "Моя кнопка 2")
+button3 = KeyboardButton(text = "Моя кнопка 3")
+keyboard.add(button)
+keyboard.add(button2)
+keyboard.add(button3)
 
 bot = telebot.TeleBot(API_TOKEN)
 
-
-# Handle '/start' and '/help'
 @bot.message_handler(commands=['help', 'start'])
 def send_welcome(message: Message):
     bot.reply_to(message, f'YO YO YO GOOD MORNING {message.from_user.first_name} RISE AND GRIND!')
 
 
-# Handle all other messages with content_type 'text' (content_types defaults to ['text'])
 @bot.message_handler(func=lambda message: True)
 def echo_message(message):
     bot.reply_to(message, message.text)
+    bot.send_message(message.chat.id, 'klV~', reply_markup=keyboard)
 
 
 bot.infinity_polling()
