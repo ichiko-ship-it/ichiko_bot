@@ -2,18 +2,21 @@
 import telebot
 
 from config import API_TOKEN
+from telebot.types import Message
 from telebot.types import (KeyboardButton,
                            ReplyKeyboardMarkup,
                            ReplyKeyboardRemove,
                            Message)
 
 
-keyboard = ReplyKeyboardMarkup(row_width=2, resize_keyboard=False)
-button = KeyboardButton(text = "Налево",)
-button2 = KeyboardButton(text = "Направо")
-#button3 = KeyboardButton(text = "Моя кнопка 3")
-keyboard.add(button)
-keyboard.add(button2)
+keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
+button1 = telebot.types.KeyboardButton(text="1")
+button2 = telebot.types.KeyboardButton(text="2")
+button3 = telebot.types.KeyboardButton(text="3")
+button4 = telebot.types.KeyboardButton(text="4")
+button5 = telebot.types.KeyboardButton(text="5")
+button6 = telebot.types.KeyboardButton(text="6")
+keyboard.add('1', '2', '3', '4', '5', '6')
 
 
 bot = telebot.TeleBot(API_TOKEN)
@@ -37,18 +40,42 @@ def echo_message(message):
     global state
     bot.reply_to(message, message.text)
     bot.send_message(message.chat.id, 'klV~', reply_markup=keyboard)
-    if state == 1 and message.text == "Налево" :
+    if state == 1 and message.text == "1" :
         bot.send_message(
             message.chat.id,
             'Вы пошли налево во вторую комнату'
         )
         state = 2
-    elif state == 1 and message.text == 'Haправo':
+    elif state == 1 and message.text == '2':
         bot.send_message(
             message.chat.id,
-            'Вы пюшли направо в третью комнату' 
+            'Вы пошли направо в третью комнату' 
         )
         state = 3
+          elif state == 2 and message.text == '3':
+        bot.send_message(
+            message.chat.id,
+            'Вы пошли налево в четвертую комнату'
+        )
+        state = 4
+    elif state == 3 and message.text == 'gang':
+        bot.send_message(
+            message.chat.id,
+            'Вы пошли направо в шестую комнату'
+        )
+        state = 6
+    elif state == 2 and message.text == 'fr':
+        bot.send_message(
+            message.chat.id,
+            'Вы пошли направо в пятую комнату'
+        )
+        state = 5
+    elif state == 3 and message.text == 'no way':
+        bot.send_message(
+            message.chat.id,
+            'Вы пошли налево в пятую комнату'
+        )
+        state = 5
     else:
         bot.send_message ( message. chat. id,
             'Вы нажали что-то не то'
