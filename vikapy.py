@@ -29,17 +29,17 @@ def send_welcome(message: Message):
     bot.reply_to(message, f'YO YO YO GOOD MORNING {message.from_user.first_name} RISE AND GRIND!')
     bot.send_message (
         message.chat.id, 
-        echo_message, 
+        'text_message', 
         reply_markup=keyboard,
         parse_mode='HTML' 
     )
     state = 1
 
 @bot.message_handler(func=lambda message: True)
-def echo_message(message):
+def text_message(message):
     global state
     bot.reply_to(message, message.text)
-    bot.send_message(message.chat.id, 'klV~', reply_markup=keyboard)
+    bot.send_message(message.chat.id, 'Выберите кнопку', reply_markup=keyboard)
     if state == 1 and message.text == "1" :
         bot.send_message(
             message.chat.id,
@@ -81,4 +81,3 @@ def echo_message(message):
             'Вы нажали что-то не то'
         )
 bot.infinity_polling()
-
