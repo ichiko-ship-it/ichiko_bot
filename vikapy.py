@@ -52,25 +52,25 @@ def echo_message(message):
             'Вы пошли направо в третью комнату' 
         )
         state = 3
-          elif state == 2 and message.text == '3':
+    elif state == 2 and message.text == '3':
         bot.send_message(
             message.chat.id,
             'Вы пошли налево в четвертую комнату'
         )
         state = 4
-    elif state == 3 and message.text == 'gang':
+    elif state == 3 and message.text == '4':
         bot.send_message(
             message.chat.id,
             'Вы пошли направо в шестую комнату'
         )
         state = 6
-    elif state == 2 and message.text == 'fr':
+    elif state == 2 and message.text == '5':
         bot.send_message(
             message.chat.id,
             'Вы пошли направо в пятую комнату'
         )
         state = 5
-    elif state == 3 and message.text == 'no way':
+    elif state == 3 and message.text == '6':
         bot.send_message(
             message.chat.id,
             'Вы пошли налево в пятую комнату'
@@ -81,3 +81,4 @@ def echo_message(message):
             'Вы нажали что-то не то'
         )
 bot.infinity_polling()
+
